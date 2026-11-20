@@ -73,6 +73,12 @@
       return;
     }
 
+    if (key === 'f' && !gameStore.state.activeModal) {
+      e.preventDefault();
+      gameStore.cycleSimSpeed();
+      return;
+    }
+
     // Modal priority: suspend global tab hotkeys so 1/2/3 exclusively select modal choices
     const modal = gameStore.state.activeModal;
     if (modal) {

@@ -25,6 +25,17 @@
     <div class="top-actions">
       <button
         type="button"
+        class="speed-btn"
+        class:fast-2x={gameStore.simSpeed === 2}
+        class:fast-5x={gameStore.simSpeed === 5}
+        title="Fast Forward (F): cycle 1× / 2× / 5×"
+        aria-label="Cycle fast forward speed"
+        onclick={() => gameStore.cycleSimSpeed()}
+      >
+        {gameStore.simSpeed === 1 ? '1×' : `» ${gameStore.simSpeed}×`}
+      </button>
+      <button
+        type="button"
         class="icon-btn"
         title="Toggle Audio (M)"
         aria-label="Toggle audio mute"
@@ -138,6 +149,41 @@
   .top-actions {
     display: flex;
     gap: 6px;
+    align-items: center;
+  }
+
+  .speed-btn {
+    height: 26px;
+    padding: 0 8px;
+    border-radius: 7px;
+    border: 1px solid var(--border-subtle);
+    background: rgba(30, 41, 59, 0.75);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-muted);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 120ms ease, border-color 120ms ease, color 120ms ease;
+  }
+
+  .speed-btn:hover {
+    background: rgba(51, 65, 85, 0.9);
+    color: var(--text-main);
+  }
+
+  .speed-btn.fast-2x {
+    background: rgba(56, 189, 248, 0.2);
+    border-color: rgba(56, 189, 248, 0.65);
+    color: #7dd3fc;
+  }
+
+  .speed-btn.fast-5x {
+    background: rgba(251, 191, 36, 0.22);
+    border-color: rgba(251, 191, 36, 0.75);
+    color: #fde68a;
+    box-shadow: 0 0 10px rgba(251, 191, 36, 0.22);
   }
 
   .icon-btn {
