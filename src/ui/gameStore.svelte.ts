@@ -124,10 +124,6 @@ class GameStore {
     sfx.play('click');
   }
 
-  setSimSpeed(speed: SimSpeed): void {
-    this.simSpeed = speed;
-  }
-
   dismissOfflineSummary(): void {
     this.offlineSummary = null;
   }

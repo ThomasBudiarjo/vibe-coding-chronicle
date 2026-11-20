@@ -29,7 +29,7 @@
         class:fast-2x={gameStore.simSpeed === 2}
         class:fast-5x={gameStore.simSpeed === 5}
         title="Fast Forward (F): cycle 1× / 2× / 5×"
-        aria-label="Cycle fast forward speed"
+        aria-label={`Fast forward speed: ${gameStore.simSpeed}×. Activate to cycle.`}
         onclick={() => gameStore.cycleSimSpeed()}
       >
         {gameStore.simSpeed === 1 ? '1×' : `» ${gameStore.simSpeed}×`}

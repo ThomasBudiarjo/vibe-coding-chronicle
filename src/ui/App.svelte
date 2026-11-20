@@ -64,6 +64,7 @@
       return;
     }
     if (gameStore.settingsOpen) return;
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
 
     const key = e.key.toLowerCase();
 
