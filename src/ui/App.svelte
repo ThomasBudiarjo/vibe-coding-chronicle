@@ -64,12 +64,19 @@
       return;
     }
     if (gameStore.settingsOpen) return;
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
 
     const key = e.key.toLowerCase();
 
     if (key === 'm') {
       e.preventDefault();
       gameStore.toggleMute();
+      return;
+    }
+
+    if (key === 'f' && !gameStore.state.activeModal) {
+      e.preventDefault();
+      gameStore.cycleSimSpeed();
       return;
     }
 

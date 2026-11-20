@@ -89,7 +89,7 @@
           <span><span class="kbd">←</span> / <span class="kbd">P</span> Reject / Plan</span>
           <span><span class="kbd">↑/↓</span> + <span class="kbd">Enter</span> Lists</span>
           <span><span class="kbd">1-3</span> Modal Choice</span>
-          <span><span class="kbd">M</span> Mute Audio</span>
+          <span><span class="kbd">M</span> Mute · <span class="kbd">F</span> 1×/2×/5×</span>
         </div>
       </div>
 

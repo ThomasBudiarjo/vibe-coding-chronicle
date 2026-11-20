@@ -26,6 +26,8 @@ import type {
   TabId
 } from '../engine/types';
 
+export type SimSpeed = 1 | 2 | 5;
+
 class GameStore {
   state = $state.raw<GameState>(createInitialState());
   activeTab = $state<TabId>('work');
@@ -33,6 +35,7 @@ class GameStore {
   settingsOpen = $state<boolean>(false);
   offlineSummary = $state<OfflineSummary | null>(null);
   listFocusIndex = $state<number>(0);
+  simSpeed = $state<SimSpeed>(1);
 
   private tickHandle: ReturnType<typeof setInterval> | null = null;
   private saveHandle: ReturnType<typeof setInterval> | null = null;
@@ -57,9 +60,13 @@ class GameStore {
 
     if (this.tickHandle) clearInterval(this.tickHandle);
     this.tickHandle = setInterval(() => {
-      const { state, effects } = tickGame(this.state, 0.1);
-      this.state = state;
-      this.playEffects(effects);
+      const steps = this.simSpeed;
+      for (let i = 0; i < steps; i++) {
+        const { state, effects } = tickGame(this.state, 0.1);
+        this.state = state;
+        this.playEffects(effects);
+        if (state.activeModal || state.mcbTripped) break;
+      }
     }, 100);
 
     if (this.saveHandle) clearInterval(this.saveHandle);
@@ -108,6 +115,13 @@ class GameStore {
 
   toggleMute(): void {
     this.muted = sfx.toggleMute();
+  }
+
+  cycleSimSpeed(): void {
+    const order: SimSpeed[] = [1, 2, 5];
+    const next = order[(order.indexOf(this.simSpeed) + 1) % order.length];
+    this.simSpeed = next;
+    sfx.play('click');
   }
 
   dismissOfflineSummary(): void {
